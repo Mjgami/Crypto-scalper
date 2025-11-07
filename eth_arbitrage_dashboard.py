@@ -1,4 +1,4 @@
-import streamlit as st import pandas as pd import ccxt import time import requests from datetime import datetime
+Shared streamlit as st import pandas as pd import ccxt import time import requests from datetime import datetime
 
 ------------------- CONFIGURATION -------------------
 
@@ -12,7 +12,7 @@ def send_telegram_alert(bot_token, chat_id, message): if bot_token and chat_id: 
 
 def calculate_arbitrage(prices, taker_fee=0.001): if not prices: return None sorted_prices = sorted(prices.items(), key=lambda x: x[1]) buy_exchange, buy_price = sorted_prices[0] sell_exchange, sell_price = sorted_prices[-1] buy_effective = buy_price * (1 + taker_fee) sell_effective = sell_price * (1 - taker_fee) profit = sell_effective - buy_effective profit_percent = (profit / buy_effective) * 100 return { 'buy_exchange': buy_exchange, 'buy_price': buy_price, 'sell_exchange': sell_exchange, 'sell_price': sell_price, 'profit': profit, 'profit_percent': profit_percent }
 
-Shared area to track last_alerts so we don't spam
+#Shared area to track last_alerts so we don't spam
 
 if 'last_alert' not in st.session_state: st.session_state['last_alert'] = {}
 
